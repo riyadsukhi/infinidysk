@@ -1,3 +1,4 @@
+# Register manual Docker image builds in this fork
 name: Build custom image
 
 on:
