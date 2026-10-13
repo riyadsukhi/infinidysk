@@ -1,0 +1,25 @@
+name: Build PR 1488 test image
+
+# Fork-local build of the exact PR commit. The push trigger is scoped to this
+# workflow file so GitHub can start it without workflow-dispatch API access.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/build-pr-1488-image.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: github.repository == 'riyadsukhi/infinidysk'
+    uses: ./.github/workflows/docker-build-push.yml
+    permissions:
+      contents: read
+      packages: write
+    with:
+      checkout_ref: 6c733125ffaede693adb734854ec19aa213be152
+      tags: ghcr.io/riyadsukhi/infinidysk:pr-1488-6c733125
+      nzbdav_version: pr-1488-6c733125
+    secrets:
+      registry_token: ${{ secrets.GITHUB_TOKEN }}
